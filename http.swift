@@ -9,7 +9,7 @@
 *
 */
 
-import UIKit
+import Foundation
 
 /// A global HTTP instance.
 public let http = HTTP()
@@ -78,17 +78,17 @@ public class HTTP {
             }
             return _bytes!
         }
-        private var _image : UIImage?
-        /// A UIImage representation of the response body. The body must be valid image data.
-        public var image : UIImage {
-            if _image == nil {
-                _image = UIImage(data: data)
-                if _image == nil {
-                    _image = UIImage()
-                }
-            }
-            return _image!
-        }
+//        private var _image : UIImage?
+//        /// A UIImage representation of the response body. The body must be valid image data.
+//        public var image : UIImage {
+//            if _image == nil {
+//                _image = UIImage(data: data)
+//                if _image == nil {
+//                    _image = UIImage()
+//                }
+//            }
+//            return _image!
+//        }
         /// A serialized HTTP payload. This method is only intended for diagnostics and cannot be trusted for transmissions.
         public var description : String {
             let statusText : String
