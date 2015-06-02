@@ -105,7 +105,7 @@ http.post("http://domain.com").body(data) { resp in
 
 ```swift
 var imageData = NSData() // pretend we have some jpeg data 
-http.post("http://domain.com").header(["Content-Type", "image/jpeg"]).body(imageData) { resp in
+http.post("http://domain.com").header(["Content-Type": "image/jpeg"]).body(imageData) { resp in
     println("response: \(resp.string)")
 }
 ```
