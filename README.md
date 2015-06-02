@@ -8,7 +8,6 @@ An incredibly simple HTTP client library for Swift.
 - Support for JSON, NSData, [UInt8], String body content.
 - QueryString and Form encoding.
 - Builtin JSON serialization
-- Request image data directly into UIImage.
 - Supports GET, POST, PUT, HEAD, DELETE, PATCH, OPTIONS.
 
 ##Install (iOS and OS X)
@@ -64,14 +63,6 @@ Binary data response. NSData or [UInt8].
 http.get("https://www.google.com/images/logo.png") { resp in
     println("[UInt8]: \(resp.data.length) bytes")
     println("NSData: \(count(resp.bytes)) bytes")
-}
-```
-
-UIImage response.
-
-```swift
-http.get("https://www.google.com/images/logo.png") { resp in
-    println("UIImage: \(resp.image.size)")
 }
 ```
 
