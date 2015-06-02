@@ -27,6 +27,8 @@ The `import SnapHTTP` directive is required in order to access SnapHTTP features
 
 ###Drop-in
 
+Just drop the `http.swift` file into your project.
+
 There is no need for `import SnapHTTP` when manually installing.
 
 ##Examples
