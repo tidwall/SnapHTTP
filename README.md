@@ -136,4 +136,4 @@ Josh Baker [@tidwall](http://twitter.com/tidwall)
 
 ## License
 
-The SwiftWebSocket source code is available under the MIT License.
+The SnapHTTP source code is available under the MIT License.
