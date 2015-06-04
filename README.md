@@ -4,7 +4,7 @@ An incredibly simple HTTP client library for Swift.
 
 ## Features
 
-- Fantastically basic closure API with chaining.
+- Super simple Closure API with chaining.
 - Support for JSON, NSData, [UInt8], String body content.
 - QueryString and Form encoding.
 - Builtin JSON serialization
