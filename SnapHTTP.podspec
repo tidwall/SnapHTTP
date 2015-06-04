@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.9"
   s.ios.platform          = :ios, "8.0"
   s.osx.platform          = :osx, "10.9"
-  s.source_files          = "http.swift"
+  s.source_files          = "SnapHTTP/http.swift"
   s.requires_arc          = true
 end
