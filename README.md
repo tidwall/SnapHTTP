@@ -10,26 +10,45 @@ An incredibly simple HTTP client library for Swift.
 - Builtin JSON serialization
 - Supports GET, POST, PUT, HEAD, DELETE, PATCH, OPTIONS.
 
-##Install (iOS and OS X)
+##Installation (iOS and OS X)
 
-###CocoaPods
+### [Carthage]
 
-You can use [CocoaPods](http://cocoapods.org/?q=SnapHTTP) to install the `SnapHTTP` framework.
+[Carthage]: https://github.com/Carthage/Carthage
 
-Add the following lines to your `Podfile`.
+Add the following to your Cartfile:
+
+```
+github "tidwall/SnapHTTP"
+```
+
+Then run `carthage update`.
+
+Follow the current instructions in [Carthage's README][carthage-installation]
+for up to date installation instructions.
+
+[carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
+
+The `import SnapHTTP` directive is required in order to access SnapHTTP features.
+
+### [CocoaPods]
+
+[CocoaPods]: http://cocoapods.org
+
+Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
 
 ```ruby
 use_frameworks!
 pod 'SnapHTTP'
 ```
 
+Then run `pod install` with CocoaPods 0.36 or newer.
+
 The `import SnapHTTP` directive is required in order to access SnapHTTP features.
 
 ###Manually
 
-Copy the `SnapHTTP/http.swift` file into your project.
-
-Just drop the `http.swift` file into your project.
+Copy the `SnapHTTP\http.swift` file into your project.  
 
 There is no need for `import SnapHTTP` when manually installing.
 
