@@ -25,7 +25,9 @@ pod 'SnapHTTP'
 
 The `import SnapHTTP` directive is required in order to access SnapHTTP features.
 
-###Drop-in
+###Manually
+
+Copy the `SnapHTTP/http.swift` file into your project.
 
 There is no need for `import SnapHTTP` when manually installing.
 
