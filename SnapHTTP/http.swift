@@ -17,13 +17,13 @@ public let http = HTTP()
 /// The HTTP object provides support for creating server requests.
 public class HTTP {
     /// The HTTP.Response object contains the results of a server request.
-    public class Response : Printable {
+    public class Response : CustomStringConvertible {
         /// The raw binary data of the response body content.
         public let data : NSData
         /// The HTTP header keys and values.
         public let headers : [String: String]
         /// A connection error. This only occures when the request cannot establish an HTTP connection.
-        public let error : NSError?
+        public let error : ErrorType?
         /// The HTTP status code of the response.
         public let statusCode : Int
         private let resp : NSHTTPURLResponse
@@ -62,7 +62,12 @@ public class HTTP {
         /// A deserialized JSON representation of the response body content.
         public var json : AnyObject {
             if _json == nil && _jsonError == nil {
-                _json = NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments, error: &_jsonError)
+                do {
+                    _json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
+                } catch let error as NSError {
+                    _jsonError = error
+                    _json = nil
+                }
                 if _json == nil {
                     _json = Dictionary<String,AnyObject>()
                 }
@@ -101,10 +106,10 @@ public class HTTP {
             for (key, value) in headers {
                 string += "\(key): \(value)\r\n"
             }
-            if error != nil {
-                string += "X-Client-Error-Code: \(error!.code)\r\n"
-                string += "X-Client-Error-Domain: \(error!.domain)\r\n"
-                string += "\r\n\(error!.localizedDescription)"
+            if let error = error as? NSError {
+                string += "X-Client-Error-Code: \(error.code)\r\n"
+                string += "X-Client-Error-Domain: \(error.domain)\r\n"
+                string += "\r\n\(error.localizedDescription)"
             } else {
                 let type = headers["Content-Type"]
                 if type != nil && type!.hasPrefix("text/") || type!.hasPrefix("application/json") {
@@ -245,7 +250,7 @@ public class HTTP {
                                 formContent = paramStr
                             }
                         }
-                        var url = NSURL(string: urlStr)
+                        let url = NSURL(string: urlStr)
                         if url == nil {
                             error = NSError(domain: NSURLErrorDomain, code: NSURLErrorUnsupportedURL, userInfo: [NSLocalizedDescriptionKey: "unsupported URL"])
                             return
@@ -268,7 +273,14 @@ public class HTTP {
                                 req!.HTTPBodyStream = stream
                             } else if let dict : AnyObject = self.content as? AnyObject {
                                 if dict is [AnyObject] || dict is [String: AnyObject] {
-                                    req!.HTTPBody = NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions(0), error: &error)
+                                    do {
+                                        req!.HTTPBody = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions(rawValue: 0))
+                                    } catch let error1 as NSError {
+                                        error = error1
+                                        req!.HTTPBody = nil
+                                    } catch {
+                                        fatalError()
+                                    }
                                     req!.setValue("application/json", forHTTPHeaderField: "Content-Type")
                                 } else {
                                     error = NSError(domain: NSURLErrorDomain, code: NSURLErrorDataNotAllowed, userInfo: [NSLocalizedDescriptionKey: "invalid body content"])
@@ -284,7 +296,14 @@ public class HTTP {
                     var data : NSData?
                     if error == nil {
                         var res : NSURLResponse?
-                        data = NSURLConnection.sendSynchronousRequest(req!, returningResponse: &res, error: &error)
+                        do {
+                            data = try NSURLConnection.sendSynchronousRequest(req!, returningResponse: &res)
+                        } catch let error1 as NSError {
+                            error = error1
+                            data = nil
+                        } catch {
+                            fatalError()
+                        }
                         if error == nil {
                             hres = res as? NSHTTPURLResponse
                             if hres == nil {
