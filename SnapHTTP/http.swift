@@ -232,7 +232,7 @@ public class HTTP {
                                     paramArr += ["\(k)=" + "\(value)".stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!]
                                 }
                             }
-                            paramStr = "&".join(paramArr)
+                            paramStr = paramArr.joinWithSeparator("&")
                             let query : Bool
                             switch self.method {
                             case "GET", "HEAD", "DELETE":
