@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "SnapHTTP"
-  s.version               = "1.0.0"
+  s.version               = "1.1.0"
   s.summary               = "An incredibly simple HTTP client library for Swift."
   s.homepage              = "https://github.com/tidwall/SnapHTTP"
   s.license               = { :type => "Attribution License", :file => "LICENSE" }
