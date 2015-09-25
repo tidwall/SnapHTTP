@@ -2,8 +2,6 @@
 
 An incredibly simple HTTP client library for Swift.
 
-**Built for Swift 2.0** - For Swift 1.2 support use v0.1.10 or earlier.
-
 ## Features
 
 - Super simple Closure API with chaining.
