@@ -329,7 +329,7 @@ public class HTTP {
             pthread_mutex_destroy(&mutex)
         }
     }
-    /// Make a POST request to the specified URL.
+    /// Make a GET request to the specified URL.
     public func get(url : String, closure : (resp : Response)->Void = HTTP.closure) -> Request {
         return Request(method: "GET", url: url, closure: closure)
     }
